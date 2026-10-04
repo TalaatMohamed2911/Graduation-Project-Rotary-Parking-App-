@@ -1,0 +1,32 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+final List<Marker> myMarkers = [];
+
+List<String> images = [
+  "images/done.png",
+  "images/p_red.png",
+  "images/p_red.png",
+  "images/p_red.png",
+  "images/p_red.png",
+];
+final List<LatLng> positions = <LatLng>[
+  const LatLng(29.8519, 31.3420), //كلية هندسة حلوان
+  const LatLng(29.845734, 31.362051), //جامعة مايو
+  const LatLng(29.871489, 31.319822), //جامعة حلوان
+  const LatLng(29.782317, 31.323655), // مصنع الحديد والصلب حلوان
+  const LatLng(29.840697, 31.314976), // تراخيص حلوان
+];
+
+const String GOOGLE_MAPS_API_KEY = "AIzaSyDhhXoAJDKWWSp0c2R0PYPXLu1Dnw3cfoU";
+
+/// Generates a cryptographically secure random nonce, to be included in a
+/// credential request.
+
+/// Returns the sha256 hash of [input] in hex notation.
+String sha256ofString(String input) {
+  final bytes = utf8.encode(input);
+  final digest = sha256.convert(bytes);
+  return digest.toString();
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "514714792399",
+    "project_id": "rotary-parking",
+    "storage_bucket": "rotary-parking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514714792399:android:dfb3bbda6a8b5ed3dd62ba",
+        "android_client_info": {
+          "package_name": "com.example.rotary_parking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8ye5q0Be4MNA_OoRVAuyLfat1mJ0ybY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

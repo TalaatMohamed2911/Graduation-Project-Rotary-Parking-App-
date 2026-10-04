@@ -199,7 +199,7 @@ class _MapScreenState extends State<MapScreen>
                         height: 120,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("images/parking.jpg"),
+                            image: AssetImage("assets/images/parking.jpg"),
                             fit: BoxFit.cover,
                             filterQuality: FilterQuality.high,
                           ),

@@ -25,7 +25,7 @@ class Profile extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: const Image(
-                        image: AssetImage("images/login.png"),
+                        image: AssetImage("assets/images/login.png"),
                       ),
                     ),
                   ),

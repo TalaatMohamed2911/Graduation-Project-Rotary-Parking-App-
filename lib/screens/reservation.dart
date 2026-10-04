@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rotary_parking/component/parking_slot.dart';
+import 'package:rotary_parking/component/parking_slot_info_window.dart';
 import 'package:rotary_parking/view_model/paking_controller.dart';
 
 class ReservationPage extends StatelessWidget {
@@ -12,17 +12,12 @@ class ReservationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "SMART CAR PARKING",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
+        title: Text(
+          "SMART CAR PARKING",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         centerTitle: true,
       ),
@@ -32,20 +27,11 @@ class ReservationPage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "Parking Slots",
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+              Text(
+                "Parking Slots",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
               const SizedBox(height: 40),
               const Row(
@@ -130,43 +116,6 @@ class ReservationPage extends StatelessWidget {
                         slotName: "Slot no.4",
                         slotId: "4",
                         time: parkingController.slot4.value.parkingHours
-                            .toString(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: Obx(
-                      () => ParkingSlot(
-                        isBooked: parkingController.slot5.value.booked,
-                        isParked: parkingController.slot5.value.isParked,
-                        slotName: "Slot no.5",
-                        slotId: "5",
-                        time: parkingController.slot5.value.parkingHours
-                            .toString(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: VerticalDivider(
-                      color: Colors.blue,
-                      thickness: 1,
-                    ),
-                  ),
-                  Expanded(
-                    child: Obx(
-                      () => ParkingSlot(
-                        isBooked: parkingController.slot6.value.booked,
-                        isParked: parkingController.slot6.value.isParked,
-                        slotName: "Slot no.6",
-                        slotId: "6",
-                        time: parkingController.slot6.value.parkingHours
                             .toString(),
                       ),
                     ),

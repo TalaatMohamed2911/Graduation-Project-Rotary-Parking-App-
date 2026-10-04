@@ -11,8 +11,6 @@ class SplashScreen1 extends StatefulWidget {
 }
 
 class _SplashScreen1State extends State<SplashScreen1> {
-  get splash => null;
-
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
@@ -21,8 +19,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
       splash: Column(
         children: [
           Center(
-            child: LottieBuilder.asset(
-                "assets/Lottie/Animation - 1721219640283.json"),
+            child: LottieBuilder.asset("assets/animation/splash.json"),
           ),
           const Text("data"),
         ],

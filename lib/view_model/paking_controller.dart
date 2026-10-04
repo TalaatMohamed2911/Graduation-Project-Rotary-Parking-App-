@@ -10,7 +10,7 @@ class ParkingController extends GetxController {
   RxDouble parkingTimeInMin = 10.0.obs;
   RxInt parkingAmount = 5.obs;
   RxString slotName = "".obs;
-  // int time = 19;
+
   Rx<CarModel> slot1 = CarModel(
     booked: false,
     isParked: false,
@@ -39,20 +39,6 @@ class ParkingController extends GetxController {
     name: "",
     paymentDone: false,
   ).obs;
-  Rx<CarModel> slot5 = CarModel(
-    booked: false,
-    isParked: false,
-    parkingHours: "",
-    name: "",
-    paymentDone: false,
-  ).obs;
-  Rx<CarModel> slot6 = CarModel(
-    booked: false,
-    isParked: false,
-    parkingHours: "",
-    name: "",
-    paymentDone: false,
-  ).obs;
 
   void bookParkingSlot(String slotId) {
     //print(parkingTimeInMin.value);
@@ -67,12 +53,8 @@ class ParkingController extends GetxController {
       slot3Controller();
     } else if (slotId == "4") {
       slot4Controller();
-    } else if (slotId == "5") {
-      slot5Controller();
-    } else if (slotId == "6") {
-      slot6Controller();
     }
-    BookedPopup();
+    bookedPopup();
   }
 
   void slot1Controller() async {
@@ -184,62 +166,9 @@ class ParkingController extends GetxController {
     print("Parking Time  ❤️ End ");
   }
 
-  void slot5Controller() async {
-    slot5.value = CarModel(
-      booked: true,
-      isParked: true,
-      parkingHours: "${parkingTimeInMin.value}",
-      name: name.text,
-      paymentDone: true,
-    );
-    int parkingTime = parkingTimeInMin.value.toInt();
-
-    while (parkingTime != 0) {
-      await Future.delayed(const Duration(seconds: 1));
-      parkingTime--;
-      print(parkingTime);
-      slot5.value.parkingHours = parkingTime.toString();
-    }
-
-    slot5.value = CarModel(
-      booked: false,
-      isParked: false,
-      parkingHours: "",
-      name: "",
-      paymentDone: false,
-    );
-    print("Parking Time  ❤️ End ");
-  }
-
-  void slot6Controller() async {
-    slot6.value = CarModel(
-      booked: true,
-      isParked: true,
-      parkingHours: "${parkingTimeInMin.value}",
-      name: name.text,
-      paymentDone: true,
-    );
-    int parkingTime = parkingTimeInMin.value.toInt();
-
-    while (parkingTime != 0) {
-      await Future.delayed(const Duration(seconds: 1));
-      parkingTime--;
-      print(parkingTime);
-      slot6.value.parkingHours = parkingTime.toString();
-    }
-
-    slot6.value = CarModel(
-      booked: false,
-      isParked: false,
-      parkingHours: "",
-      name: "",
-      paymentDone: false,
-    );
-    print("Parking Time  ❤️ End ");
-  }
-
   void timeCounter() {}
-  Future<dynamic> BookedPopup() {
+
+  Future<dynamic> bookedPopup() {
     return Get.defaultDialog(
         barrierDismissible: false,
         title: "SLOT BOOKED",

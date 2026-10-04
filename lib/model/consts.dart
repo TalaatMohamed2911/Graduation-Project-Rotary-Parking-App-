@@ -3,13 +3,14 @@ import 'package:crypto/crypto.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final List<Marker> myMarkers = [];
+Map<PolylineId, Polyline> polylines = {};
 
 List<String> images = [
-  "images/done.png",
-  "images/p_red.png",
-  "images/p_red.png",
-  "images/p_red.png",
-  "images/p_red.png",
+  "assets/images/done.png",
+  "assets/images/p_red.png",
+  "assets/images/p_red.png",
+  "assets/images/p_red.png",
+  "assets/images/p_red.png",
 ];
 final List<LatLng> positions = <LatLng>[
   const LatLng(29.8519, 31.3420), //كلية هندسة حلوان

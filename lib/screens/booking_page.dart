@@ -11,7 +11,6 @@ class BookingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ParkingController parkingController = Get.put(ParkingController());
-    // WithoutFirebase withoutFirebase = Get.put(WithoutFirebase());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -29,7 +28,7 @@ class BookingPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(14),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -55,7 +54,7 @@ class BookingPage extends StatelessWidget {
                     ),
                     Container(
                       width: 130,
-                      height: 50,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(10),
@@ -64,7 +63,7 @@ class BookingPage extends StatelessWidget {
                         child: Text(
                           slotName,
                           style: const TextStyle(
-                            fontSize: 27,
+                            fontSize: 26,
                             //fontWeight: FontWeight.w700,
                             color: Colors.white,
                           ),
@@ -92,8 +91,6 @@ class BookingPage extends StatelessWidget {
                       child: TextFormField(
                         controller: parkingController.name,
                         decoration: InputDecoration(
-                          fillColor: const Color.fromARGB(255, 233, 218, 82),
-                          //filled: true,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(40),
                               borderSide: const BorderSide(
@@ -127,8 +124,6 @@ class BookingPage extends StatelessWidget {
                       child: TextFormField(
                         controller: parkingController.vehicalNumber,
                         decoration: InputDecoration(
-                          fillColor: const Color.fromARGB(255, 233, 218, 82),
-                          //filled: true,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(40),
                               borderSide: const BorderSide(
@@ -164,15 +159,15 @@ class BookingPage extends StatelessWidget {
                     inactiveColor: Colors.grey,
                     label: "${parkingController.parkingTimeInMin.value} min",
                     value: parkingController.parkingTimeInMin.value,
-                    onChanged: (v) {
-                      parkingController.parkingTimeInMin.value = v;
+                    onChanged: (newValue) {
+                      parkingController.parkingTimeInMin.value = newValue;
                       // if (v <= 30) {
                       //   parkingController.parkingAmount.value = 30;
                       // } else {
                       //   parkingController.parkingAmount.value = 60;
                       // }
                       parkingController.parkingAmount.value =
-                          (parkingController.parkingTimeInMin.value * 3)
+                          (parkingController.parkingTimeInMin.value * 1.5)
                               .round();
                     },
                     divisions: 5,
@@ -181,7 +176,7 @@ class BookingPage extends StatelessWidget {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(left: 10, right: 20),
+                  padding: EdgeInsets.only(left: 14, right: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

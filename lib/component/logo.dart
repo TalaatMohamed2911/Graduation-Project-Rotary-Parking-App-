@@ -15,7 +15,7 @@ class Logo extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.grey[200], borderRadius: BorderRadius.circular(45)),
         child: Image.asset(
-          "images/login.png",
+          "assets/images/login.png",
         ),
       ),
     );

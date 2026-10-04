@@ -15,6 +15,7 @@ class CarModel {
       this.parkingHours,
       this.parkedFrom,
       this.parkedTo});
+
   CarModel.fromJson(Map<String, dynamic> json) {
     name = json["name"];
     isParked = json["isParked"];

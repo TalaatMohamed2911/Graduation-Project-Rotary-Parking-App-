@@ -31,7 +31,7 @@ class ParkingSlot extends StatelessWidget {
             children: [
               time == ""
                   ? const SizedBox(width: 1)
-                  : Container(
+                  : SizedBox(
                       child: Text(time),
                     ),
               Container(
@@ -50,7 +50,7 @@ class ParkingSlot extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 child: const Text(""),
               )
             ],

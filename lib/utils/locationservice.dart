@@ -1,13 +1,13 @@
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:rotary_parking/model/consts.dart';
+import 'package:rotary_parking/consts.dart';
 
 mixin class LocationServices {
   static const hewlwanUni = LatLng(29.8714, 31.3198);
 
   LatLng? currentPosition;
 
-  Future<List<LatLng>?> fetchPolylinePoints() async {
+  Future<List<LatLng>> fetchPolylinePoints() async {
     final polylinePoints = PolylinePoints(apiKey: googleMapsApiKey);
 
     final request = RoutesApiRequest(
@@ -25,6 +25,6 @@ mixin class LocationServices {
           .map((point) => LatLng(point.latitude, point.longitude))
           .toList();
     }
-    return null;
+    return [];
   }
 }

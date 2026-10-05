@@ -6,13 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:rotary_parking/model/consts.dart';
-import 'package:rotary_parking/model/locationservice.dart';
-import 'package:rotary_parking/model/slotsnumber.dart';
+import 'package:rotary_parking/consts.dart';
+import 'package:rotary_parking/utils/locationservice.dart';
+import 'package:rotary_parking/utils/slotsnumber.dart';
 import 'package:rotary_parking/screens/reservation.dart';
 import 'dart:ui' as ui;
 
-import 'package:rotary_parking/model/custommarker.dart';
+import 'package:rotary_parking/utils/custommarker.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});

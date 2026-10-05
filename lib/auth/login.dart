@@ -1,13 +1,9 @@
-import 'dart:math';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rotary_parking/components/button.dart';
 import 'package:rotary_parking/components/logo.dart';
 import 'package:rotary_parking/components/textformfield.dart';
-import 'package:rotary_parking/model/consts.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -156,8 +152,9 @@ class _LoginState extends State<Login> {
                         //  return;
                         //}
                       } on FirebaseAuthException catch (e) {
-                        isLoading = false;
-                        setState(() {});
+                        setState(() {
+                          isLoading = false;
+                        });
                         if (e.code == 'user-not-found') {
                           print('No user found for that email.');
                         } else if (e.code == 'wrong-password') {
@@ -179,8 +176,8 @@ class _LoginState extends State<Login> {
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  onPressed: () async {
-                    // await signInWithGoogle();
+                  onPressed: () {
+                    // signInWithGoogle();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -203,8 +200,8 @@ class _LoginState extends State<Login> {
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  onPressed: () async {
-                    await signInWithApple();
+                  onPressed: () {
+                    // signInWithApple();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -242,68 +239,5 @@ class _LoginState extends State<Login> {
               ],
             ),
     );
-  }
-
-  // ///sign in with google account
-  // Future signInWithGoogle() async {
-  //   // Trigger the authentication flow
-  //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-  //   if (googleUser == null) {
-  //     return;
-  //   }
-  //   // Obtain the auth details from the request
-  //   final GoogleSignInAuthentication googleAuth =
-  //       await googleUser.authentication;
-
-  //   // Create a new credential
-  //   final credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth.accessToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-
-  //   // Once signed in, return the UserCredential
-  //   await FirebaseAuth.instance.signInWithCredential(credential);
-
-  //   Navigator.of(context)
-  //       .pushNamedAndRemoveUntil("custom_map", (route) => false);
-  // }
-
-  String generateNonce([int length = 32]) {
-    const charset =
-        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
-    final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
-        .join();
-  }
-
-  Future signInWithApple() async {
-    // To prevent replay attacks with the credential returned from Apple, we
-    // include a nonce in the credential request. When signing in with
-    // Firebase, the nonce in the id token returned by Apple, is expected to
-    // match the sha256 hash of `rawNonce`.
-    final rawNonce = generateNonce();
-    final nonce = sha256ofString(rawNonce);
-
-    // Request credential for the currently signed in Apple account.
-    final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-      nonce: nonce,
-    );
-
-    // Create an `OAuthCredential` from the credential returned by Apple.
-    final oauthCredential = OAuthProvider("apple.com").credential(
-      idToken: appleCredential.identityToken,
-      rawNonce: rawNonce,
-    );
-
-    // Sign in the user with Firebase. If the nonce we generated earlier does
-    // not match the nonce in `appleCredential.identityToken`, sign in will fail.
-    await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil("custom_map", (route) => false);
   }
 }

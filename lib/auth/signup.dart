@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -112,26 +112,25 @@ class _SignUpState extends State<SignUp> {
             onPressed: () async {
               if (formState.currentState!.validate()) {
                 try {
-                  // ignore: unused_local_variable
-                  final credential = await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
+                  await FirebaseAuth.instance.createUserWithEmailAndPassword(
                     email: email.text,
                     password: pass.text,
                   );
-                  FirebaseAuth.instance.currentUser!.sendEmailVerification();
+                  await FirebaseAuth.instance.currentUser!
+                      .sendEmailVerification();
                   Navigator.of(context).pushReplacementNamed("login");
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'weak-password') {
-                    print('The password provided is too weak.');
+                    log('The password provided is too weak.');
                   } else if (e.code == 'email-already-in-use') {
-                    print('The account already exists for that email.');
+                    log('The account already exists for that email.');
                   }
                 } catch (e) {
-                  print(e);
+                  log(e.toString());
                 }
-                Navigator.of(context).pushReplacementNamed("login");
+                Navigator.of(context).pop();
               } else {
-                print("not valid");
+                log("not valid");
               }
             },
           ),
@@ -140,7 +139,7 @@ class _SignUpState extends State<SignUp> {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).pushReplacementNamed("login");
+              Navigator.of(context).pop();
             },
             child: const Center(
               child: Text.rich(

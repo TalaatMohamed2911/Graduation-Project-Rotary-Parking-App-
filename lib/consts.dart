@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final List<Marker> myMarkers = [];
@@ -21,13 +19,3 @@ final List<LatLng> positions = <LatLng>[
 ];
 
 const String googleMapsApiKey = 'AIzaSyDhhXoAJDKWWSp0c2R0PYPXLu1Dnw3cfoU';
-
-/// Generates a cryptographically secure random nonce, to be included in a
-/// credential request.
-
-/// Returns the sha256 hash of [input] in hex notation.
-String sha256ofString(String input) {
-  final bytes = utf8.encode(input);
-  final digest = sha256.convert(bytes);
-  return digest.toString();
-}

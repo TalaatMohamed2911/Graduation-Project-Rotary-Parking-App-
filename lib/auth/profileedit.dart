@@ -23,10 +23,12 @@ class _ProfileEditState extends State<ProfileEdit> {
   TextEditingController uid = TextEditingController();
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   bool isLoading = false;
-  edit() async {
+
+  Future<void> edit() async {
     try {
-      isLoading = true;
-      setState(() {});
+      setState(() {
+        isLoading = true;
+      });
       await FirebaseAuth.instance.currentUser!.updateDisplayName(name.text);
       Navigator.of(context).pop();
     } catch (e) {

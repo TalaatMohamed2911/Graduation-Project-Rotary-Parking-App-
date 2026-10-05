@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:rotary_parking/view_model/paking_controller.dart';
+import 'package:rotary_parking/controller/paking_controller.dart';
 
 class BookingPage extends StatelessWidget {
   final String slotName;

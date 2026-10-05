@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rotary_parking/components/parking_slot_info_window.dart';
-import 'package:rotary_parking/view_model/paking_controller.dart';
+import 'package:rotary_parking/controller/paking_controller.dart';
 
 class ReservationPage extends StatelessWidget {
   const ReservationPage({super.key});

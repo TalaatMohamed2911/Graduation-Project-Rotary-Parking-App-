@@ -12,7 +12,7 @@ import 'package:rotary_parking/model/slotsnumber.dart';
 import 'package:rotary_parking/screens/reservation.dart';
 import 'dart:ui' as ui;
 
-import 'package:rotary_parking/view/custommarker.dart';
+import 'package:rotary_parking/model/custommarker.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});

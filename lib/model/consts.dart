@@ -20,7 +20,7 @@ final List<LatLng> positions = <LatLng>[
   const LatLng(29.840697, 31.314976), // تراخيص حلوان
 ];
 
-const String GOOGLE_MAPS_API_KEY = "AIzaSyDhhXoAJDKWWSp0c2R0PYPXLu1Dnw3cfoU";
+const String googleMapsApiKey = 'AIzaSyDhhXoAJDKWWSp0c2R0PYPXLu1Dnw3cfoU';
 
 /// Generates a cryptographically secure random nonce, to be included in a
 /// credential request.

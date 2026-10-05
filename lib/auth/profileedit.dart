@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rotary_parking/component/textformfield.dart';
+import 'package:rotary_parking/components/textformfield.dart';
 
 class ProfileEdit extends StatefulWidget {
   final String oldName;

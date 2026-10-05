@@ -29,93 +29,85 @@ class _MapScreenState extends State<MapScreen>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) async => await _determinePosition()); //initializeMap()
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) async => await _determinePosition());
     onLoadData();
   }
 
-  // Future<void> initializeMap() async {
-  //   await _determinePosition();
-  //   final coordinates = await fetchPolylinePoints();
-  //   generatePolyLineFromPoints(coordinates);
-  // }
+  Future<void> initializeMap() async {
+    await _determinePosition();
+    final coordinates = await fetchPolylinePoints();
+    generatePolyLineFromPoints(coordinates);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          GoogleMap(
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(29.85123, 31.3421),
-              zoom: 12,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            GoogleMap(
+              initialCameraPosition: const CameraPosition(
+                target: LatLng(29.85123, 31.3421),
+                zoom: 12,
+              ),
+              markers: Set<Marker>.of(myMarkers),
+              polylines: Set<Polyline>.of(polylines.values),
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              padding: EdgeInsets.only(top: 20),
+              onMapCreated: (GoogleMapController controller) {
+                //_googleMapController.complete(controller);
+                _customInfoWindowController.googleMapController = controller;
+              },
+              onTap: (position) {
+                _customInfoWindowController.hideInfoWindow!();
+              },
+              onCameraMove: (position) {
+                _customInfoWindowController.onCameraMove!();
+              },
             ),
-            markers: Set<Marker>.of(myMarkers),
-            polylines: Set<Polyline>.of(polylines.values),
-            myLocationEnabled: true,
-            myLocationButtonEnabled: true,
-            padding: EdgeInsets.only(top: 20),
-            onMapCreated: (GoogleMapController controller) {
-              //_googleMapController.complete(controller);
-              _customInfoWindowController.googleMapController = controller;
-            },
-            onTap: (position) {
-              _customInfoWindowController.hideInfoWindow!();
-            },
-            onCameraMove: (position) {
-              _customInfoWindowController.onCameraMove!();
-            },
-          ),
-          Container(
-            width: 320,
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: const ui.Color.fromARGB(255, 235, 220, 220),
-                  width: 1.5),
-              color: const Color.fromARGB(255, 248, 246, 246),
-              borderRadius: const BorderRadius.all(Radius.circular(23)),
+            Container(
+              width: 51,
+              decoration: BoxDecoration(
+                border: Border.all(
+                    color: const ui.Color.fromARGB(255, 235, 220, 220),
+                    width: 1.5),
+                color: const Color.fromARGB(255, 248, 246, 246),
+                borderRadius: const BorderRadius.all(Radius.circular(23)),
+              ),
+              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    tooltip: "Account",
+                    color: Colors.blueAccent,
+                    onPressed: () {
+                      FirebaseAuth.instance
+                          .authStateChanges()
+                          .listen((User? user) {
+                        if (user == null) {
+                          Navigator.of(context).pushNamed("login");
+                        } else {
+                          Navigator.of(context).pushNamed("profile");
+                        }
+                      });
+                    },
+                    icon: const Icon(Icons.person),
+                  )
+                ],
+              ),
             ),
-            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            //padding: EdgeInsets.symmetric(horizontal: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: "search",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  tooltip: "Account",
-                  color: Colors.blueAccent,
-                  onPressed: () {
-                    FirebaseAuth.instance
-                        .authStateChanges()
-                        .listen((User? user) {
-                      if (user == null) {
-                        Navigator.of(context).pushNamed("login");
-                      } else {
-                        Navigator.of(context).pushNamed("profile");
-                      }
-                    });
-                  },
-                  icon: const Icon(Icons.person),
-                )
-              ],
+            CustomInfoWindow(
+              controller: _customInfoWindowController,
+              height: 165,
+              width: 230,
+              offset: 38,
             ),
-          ),
-          CustomInfoWindow(
-            controller: _customInfoWindowController,
-            height: 165,
-            width: 239,
-            offset: 38,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -173,7 +165,7 @@ class _MapScreenState extends State<MapScreen>
 
   Future<void> onLoadData() async {
     for (int a = 0; a < positions.length; a++) {
-      final Uint8List iconMaker = await getImagesFromMarkers(images[a], 94);
+      final Uint8List iconMaker = await getImagesFromMarkers(images[a], 36);
       myMarkers.add(
         Marker(
           markerId: MarkerId(a.toString()),
